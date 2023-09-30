@@ -1,5 +1,4 @@
 import express from "express";
-import * as path from "path";
 
 import { errorHandler, errorNotFoundHandler } from "./middlewares/errorHandler";
 
@@ -11,7 +10,6 @@ export const app = express();
 // Express configuration
 app.set("port", process.env.PORT || 3000);
 
-// app.use(express.static(path.join(__dirname, "../public")));
 app.use("/", index);
 
 app.use(errorNotFoundHandler);
