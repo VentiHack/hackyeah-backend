@@ -1,21 +1,19 @@
 import multer from "multer";
 import { Router } from "express";
 import { getRegion } from "../utils/db";
-
+import animals from "../animals";
 export const api = Router();
 
 api.get("/", async (req, res) => {
     const region = await getRegion(0, 0);
     const data = await region.findAll();
-
-    // console.log(data);
     res.json(data);
 });
 
 const upload = multer({
     storage: multer.diskStorage({
         destination: `${__dirname}/../public/storage`,
-        filename: (_, _x, cb) => {
+        filename: (_: any, _x: any, cb: any) => {
             cb(null, `${Date.now()}-${Math.floor(Math.random() * 100)}`);
         },
     }),
