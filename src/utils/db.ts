@@ -10,10 +10,11 @@ const createRegion = async (x: number, y: number): Promise<typeof region> => {
   const region = class extends Model {};
   
   await region.init({
+    img: DataTypes.STRING,
     animalSpecies: DataTypes.STRING,
     knownAnimalSpecies: DataTypes.BOOLEAN,
-    pos: DataTypes.GEOGRAPHY("POINT"),
-    timeDate: DataTypes.DATE,
+    latitude: DataTypes.FLOAT,
+    longitude: DataTypes.FLOAT,
     additionalInfo: DataTypes.STRING,
   }, { sequelize, modelName: name, tableName: name, freezeTableName: true });
 
@@ -37,9 +38,3 @@ export const getRegion = async (x: number, y: number): Promise<Region> => {
 
   return region;
 };
-
-// (async () => {
-//   region[0] = [
-//     await createRegion(0, 0),
-//   ];
-// })();
