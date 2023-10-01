@@ -2,28 +2,6 @@ import { app } from "./app";
 
 const port = app.get("port");
 
-const vision = require("@google-cloud/vision");
-
-const client = new vision.ImageAnnotatorClient({
-    keyFilename: "./key.json",
-});
-import animals from "./animals";
-client
-    .objectLocalization("./bison.jpg")
-    .then((results: any) => {
-        const name = results[0].localizedObjectAnnotations[0].name;
-        const isName = animals.includes(name);
-        if (isName) {
-            console.log("Animal found");
-            console.log(name);
-        } else {
-            console.log("Animal not found: ", name);
-        }
-    })
-    .catch((err: any) => {
-        console.error("ERROR:", err);
-    });
-
 const server = app.listen(port, onListening);
 server.on("error", onError);
 
